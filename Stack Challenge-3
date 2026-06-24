@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void sortDescending(int arr[], int n) {
+    // Simple bubble sort for demonstration purposes
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                // Swap arr[j] and arr[j + 1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int N;
+    
+    // Read the number of elements in the stack
+    scanf("%d", &N);
+    
+    // Check constraints
+    if (N < 1 || N > 100) {
+        printf("N must be between 1 and 100.\n");
+        return 1;
+    }
+    
+    int *stack = (int *)malloc(N * sizeof(int));
+    
+    // Read N elements into the stack
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &stack[i]);
+    }
+    
+    // Sort the stack in descending order
+    sortDescending(stack, N);
+    
+    // Print the elements in descending order
+    for (int i = 0; i < N; i++) {
+        printf("%d", stack[i]);
+        if (i < N - 1) {
+            printf(" "); // Print space between numbers
+        }
+    }
+    
+    // Free allocated memory
+    free(stack);
+    
+    return 0;
+}
