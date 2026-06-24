@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+typedef struct Stack {
+    int arr[MAX_SIZE];
+    int top;
+} Stack;
+
+// Function to initialize the stack
+void initStack(Stack* stack) {
+    stack->top = -1;
+}
+
+// Function to check if the stack is full
+int isFull(Stack* stack) {
+    return stack->top == MAX_SIZE - 1;
+}
+
+// Function to check if the stack is empty
+int isEmpty(Stack* stack) {
+    return stack->top == -1;
+}
+
+// Function to push an element onto the stack
+void push(Stack* stack, int value) {
+    if (!isFull(stack)) {
+        stack->arr[++stack->top] = value;
+    } else {
+        printf("Stack overflow\n");
+    }
+}
+
+// Function to pop an element from the stack
+int pop(Stack* stack) {
+    if (!isEmpty(stack)) {
+        return stack->arr[stack->top--];
+    } else {
+        printf("Stack underflow\n");
+        return -1; // Return -1 to indicate an error
+    }
+}
+
+// Function to print the stack elements
+void printStack(Stack* stack) {
+    for (int i = stack->top; i >= 0; i--) {
+        printf("%d", stack->arr[i]);
+        if (i > 0) {
+            printf(" "); // Print space between numbers
+        }
+    }
+}
+
+int main() {
+    Stack stack;
+    initStack(&stack);
+    
+    int N;
+    
+    // Read the number of initial elements
+    scanf("%d", &N);
+    
+    // Read N elements into the stack
+    for (int i = 0; i < N; i++) {
+        int value;
+        scanf("%d", &value);
+        push(&stack, value);
+    }
+    
+    // Pop 2 elements from the stack
+    pop(&stack);
+    pop(&stack);
+    
+    // Push 4 elements into the stack
+    for (int i = 0; i < 4; i++) {
+        int value;
+        scanf("%d", &value);
+        push(&stack, value);
+    }
+    
+    // Pop 1 element from the stack
+    pop(&stack);
+    
+    // Push 2 elements into the stack
+    for (int i = 0; i < 2; i++) {
+        int value;
+        scanf("%d", &value);
+        push(&stack, value);
+    }
+    
+    // Pop 3 elements from the stack
+    pop(&stack);
+    pop(&stack);
+    pop(&stack);
+    
+    // Print the remaining elements in the stack
+    printStack(&stack);
+    
+    return 0;
+}
